@@ -23,7 +23,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <AppBarButton Scale="2,2,2" Name="Cell0" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="0" Icon="Cancel"></AppBarButton>
+        <AppBarButton Name="Cell0"  Grid.Column="0" Grid.Row="0" Icon="Cancel"></AppBarButton>
         <AppBarButton Name="Cell1" Grid.Column="1" Grid.Row="0" Icon="Stop"></AppBarButton>
         <AppBarButton Name="Cell2" Grid.Column="2" Grid.Row="0" Icon="Accept"></AppBarButton>
 
