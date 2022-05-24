@@ -23,16 +23,14 @@ namespace TicTacToe
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        char[] field = new char[9];
         List<AppBarButton> fieldButtons = new List<AppBarButton>();
+        TheGame game;
         public MainPage()
         {
             this.InitializeComponent();
             ApplicationView.PreferredLaunchViewSize = new Size(400, 400);
             ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
-
-
-            ClearField();
+            game = new TheGame(3);
 
             fieldButtons.Add(Cell0);
             fieldButtons.Add(Cell1);
@@ -51,22 +49,13 @@ namespace TicTacToe
             }
 
             UpdateField();
-
-        }
-
-        public void ClearField()
-        {
-            for (int i = 0; i < field.Length; i++)
-            {
-                field[i] = '0';
-            }
         }
 
         public void UpdateField()
         {
             for (int i = 0; i < fieldButtons.Count; i++)
             {
-                switch (field[i])
+                switch (game.GetCell(i))
                 {
                     case '+':
                         fieldButtons[i].Icon = new SymbolIcon(Symbol.Accept);
@@ -81,6 +70,64 @@ namespace TicTacToe
                         throw new Exception("Bruh");
                 }
             }
+        }
+
+        private void MakeMove(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i < fieldButtons.Count; i++)
+            {
+                if (sender == fieldButtons[i])
+                {
+                    if(game.GetCell(i) == '0')
+                    {
+                        game.MakeMove(i);
+                        UpdateField();
+                        var gameState = game.GetGameState();
+                        if (gameState != GameState.Continue)
+                        {
+                            ShowEndMessage(gameState);
+                            game.Restart();
+                            UpdateField();
+                            return;
+                        }
+                        else
+                        {
+                            game.EnemyMove();
+                            gameState = game.GetGameState();
+                            if (gameState != GameState.Continue)
+                            {
+                                ShowEndMessage(gameState);
+                                game.Restart();
+                            }
+                        }
+                        UpdateField();
+                    }
+                    return;
+                }
+            }
+        }
+
+        private async void ShowEndMessage(GameState gameState)
+        {
+            ContentDialog dialog = new ContentDialog
+            {
+                Title = "Game is over",
+                CloseButtonText = "Ok"
+            };
+
+            switch (gameState)
+            {
+                case GameState.PlusWons:
+                    dialog.Content = "You won!!!";
+                    break;
+                case GameState.MinusWons:
+                    dialog.Content = "You lost...";
+                    break;
+                case GameState.Draw:
+                    dialog.Content = "It's a draw";
+                    break;
+            }
+            var result = await dialog.ShowAsync();
         }
     }
 }

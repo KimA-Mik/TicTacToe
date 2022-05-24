@@ -23,17 +23,17 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <AppBarButton Name="Cell0"  Grid.Column="0" Grid.Row="0" Icon="Cancel"></AppBarButton>
-        <AppBarButton Name="Cell1" Grid.Column="1" Grid.Row="0" Icon="Stop"></AppBarButton>
-        <AppBarButton Name="Cell2" Grid.Column="2" Grid.Row="0" Icon="Accept"></AppBarButton>
+        <AppBarButton Name="Cell0" Grid.Column="0" Grid.Row="0" Click="MakeMove"></AppBarButton>
+        <AppBarButton Name="Cell1" Grid.Column="1" Grid.Row="0" Click="MakeMove"></AppBarButton>
+        <AppBarButton Name="Cell2" Grid.Column="2" Grid.Row="0" Click="MakeMove"></AppBarButton>
 
-        <AppBarButton Name="Cell3" Grid.Column="0" Grid.Row="1" Icon="Accept"></AppBarButton>
-        <AppBarButton Name="Cell4" Grid.Column="1" Grid.Row="1" Icon="Accept"></AppBarButton>
-        <AppBarButton Name="Cell5" Grid.Column="2" Grid.Row="1" Icon="Accept"></AppBarButton>
+        <AppBarButton Name="Cell3" Grid.Column="0" Grid.Row="1" Click="MakeMove"></AppBarButton>
+        <AppBarButton Name="Cell4" Grid.Column="1" Grid.Row="1" Click="MakeMove"></AppBarButton>
+        <AppBarButton Name="Cell5" Grid.Column="2" Grid.Row="1" Click="MakeMove"></AppBarButton>
 
-        <AppBarButton Name="Cell6" Grid.Column="0" Grid.Row="2" Icon="Accept"></AppBarButton>
-        <AppBarButton Name="Cell7" Grid.Column="1" Grid.Row="2" Icon="Accept"></AppBarButton>
-        <AppBarButton Name="Cell8" Grid.Column="2" Grid.Row="2" Icon="Accept"></AppBarButton>
+        <AppBarButton Name="Cell6" Grid.Column="0" Grid.Row="2" Click="MakeMove"></AppBarButton>
+        <AppBarButton Name="Cell7" Grid.Column="1" Grid.Row="2" Click="MakeMove"></AppBarButton>
+        <AppBarButton Name="Cell8" Grid.Column="2" Grid.Row="2" Click="MakeMove"></AppBarButton>
 
 
 
