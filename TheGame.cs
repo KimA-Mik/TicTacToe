@@ -13,8 +13,15 @@ namespace TicTacToe
         MinusWons
     }
 
+    
+
     internal class TheGame
     {
+        //internal class Move
+        //{
+        //    public int where;
+        //    public int score;
+        //}
         public TheGame(int gameGridSize)
         {
             gridSize = gameGridSize;
@@ -46,14 +53,55 @@ namespace TicTacToe
         Random rnd = new Random();
         public void EnemyMove()
         {
-            int move = rnd.Next(field.Length);
-            while (field[move] != emptyCell)
-            {
-                move = rnd.Next(field.Length);
-            }
-            field[move] = '-';
+            RunMinMax(minusCell,0,1,3);
             UpdateGameState();
+
         }
+
+        private int RunMinMax(char gameSide, int recursiveLevel, int alpha, int beta)
+        {
+            int bestMove = -1;
+            int minMax = (gameSide == plusCell) ? int.MinValue : int.MaxValue;
+
+            if (recursiveLevel >= searhDepth)
+                return Algorithm.GetBaseMinMaxScore(field, gridSize);
+
+            //List<Move> moves = new List<Move>();
+
+            for (int i = 0; i < field.Length; i++)
+            {
+                if (field[i] == emptyCell)
+                {
+                    field[i] = gameSide;
+                    var test = RunMinMax((gameSide == minusCell) ? plusCell : minusCell, recursiveLevel + 1, alpha, beta);
+                    field[i] = emptyCell;
+
+                    if ((test > minMax && gameSide == plusCell) ||
+                        (test <= minMax && gameSide == minusCell))
+                    {
+                        //moves.Add(new Move { score = test, where = bestMove});
+                        minMax = test;
+                        bestMove = i;
+                    }
+
+                    //if (gameSide == plusCell)
+                    //    alpha = Math.Max(alpha, test);
+                    //else
+                    //    beta = Math.Min(beta, test);
+                    //if (beta < alpha)
+                    //    break;
+                }
+            }
+            if(bestMove == -1)
+                return Algorithm.GetBaseMinMaxScore(field, gridSize);
+
+            if (recursiveLevel == 0 && bestMove != -1)
+            {
+                field[bestMove] = minusCell;
+            }
+            return minMax;
+        }
+
 
         private void UpdateGameState()
         {
@@ -182,9 +230,11 @@ namespace TicTacToe
             }
         }
 
-        const char emptyCell = '0';
+        public const char emptyCell = '0';
+        public const char plusCell = '+';
+        public const char minusCell = '-';
         char[] field;
-        int searhDepth = 3;
+        int searhDepth = 2;
         int gridSize;
         GameState state = GameState.Continue;
     }

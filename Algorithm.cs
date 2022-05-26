@@ -8,11 +8,11 @@ namespace TicTacToe
 {
     internal static class Algorithm
     {
-        public static int GetBaseMinMaxScore(char[] field)
+        public static int GetBaseMinMaxScore(char[] field, int gridSize)
         {
             //cout number of available columns, rows and diagonals for player
             //assume that field is square matrix
-            int gridSize = (int)Math.Sqrt(field.Length);
+            //int gridSize = (int)Math.Sqrt(field.Length);
             //gameSize rows and colums plus 2 diagonals
             int availableVariants = gridSize * 2 + 2;
 

@@ -25,6 +25,9 @@ namespace TicTacToe
     {
         List<AppBarButton> fieldButtons = new List<AppBarButton>();
         TheGame game;
+        List<SymbolIcon> emptyIcons = new List<SymbolIcon>();
+        List<SymbolIcon> plusIcons = new List<SymbolIcon>();
+        List<SymbolIcon> minusIcons = new List<SymbolIcon>();
         public MainPage()
         {
             this.InitializeComponent();
@@ -46,6 +49,11 @@ namespace TicTacToe
             {
                 button.HorizontalAlignment = HorizontalAlignment.Center;
                 button.VerticalAlignment = VerticalAlignment.Center;
+
+                //every icon belongs to its button
+                emptyIcons.Add(new SymbolIcon(Symbol.Stop));
+                plusIcons.Add(new SymbolIcon(Symbol.Accept));
+                minusIcons.Add(new SymbolIcon(Symbol.Cancel));
             }
 
             UpdateField();
@@ -58,13 +66,13 @@ namespace TicTacToe
                 switch (game.GetCell(i))
                 {
                     case '+':
-                        fieldButtons[i].Icon = new SymbolIcon(Symbol.Accept);
+                        fieldButtons[i].Icon = plusIcons[i];
                         break;
                     case '-':
-                        fieldButtons[i].Icon = new SymbolIcon(Symbol.Cancel);
+                        fieldButtons[i].Icon = minusIcons[i];
                         break;
                     case '0':
-                        fieldButtons[i].Icon = new SymbolIcon(Symbol.Stop);
+                        fieldButtons[i].Icon = emptyIcons[i];
                         break;
                     default:
                         throw new Exception("Bruh");
