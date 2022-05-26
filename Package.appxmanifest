@@ -9,7 +9,7 @@
   <Identity
     Name="8cd629a8-605c-4943-9443-f61820eb24b8"
     Publisher="CN=Kima"
-    Version="1.0.0.0" />
+    Version="0.1.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="8cd629a8-605c-4943-9443-f61820eb24b8" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
